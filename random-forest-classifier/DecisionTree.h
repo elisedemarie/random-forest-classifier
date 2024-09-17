@@ -9,6 +9,7 @@ class DecisionTree {
         double calcEntropy(vector<int>* var);
         double calcConditionalEntropy(vector<vector<int>>* groupedVar);
         double calcInformationGain(vector<int>* var, vector<int>* classVar);
+        double chooseBestSplitVar();
 };
 
 # endif
