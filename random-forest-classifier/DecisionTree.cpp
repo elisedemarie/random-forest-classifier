@@ -3,6 +3,7 @@
 # include <map>
 # include <math.h>
 # include <iostream>
+# include "VarProcessor.h"
 
 using namespace std;
 
@@ -25,19 +26,21 @@ double DecisionTree::calcEntropy(vector<int>* variable){
     return entropy;
 }
 
-double DecisionTree::calcConditionalEntropy(vector<vector<int>*>* groupedVar) {
+double DecisionTree::calcConditionalEntropy(vector<vector<int>>* groupedVar) {
     double conditionalEntropy = 0;
     int totalSize = 0;
-    for (vector<int>* variable : *groupedVar) {
-        double entropy = calcEntropy(variable);
-        conditionalEntropy += (double)variable->size() * entropy;
-        totalSize += variable->size();
+    for (vector<int> variable : *groupedVar) {
+        double entropy = calcEntropy(&variable);
+        conditionalEntropy += (double)variable.size() * entropy;
+        totalSize += variable.size();
     }
     return conditionalEntropy / (double)totalSize;
 }
 
-double DecisionTree::calcInformationGain(vector<int>* var, vector<vector<int>*>* groupedVar) { 
+double DecisionTree::calcInformationGain(vector<int>* var, vector<int>* classVar) { 
+    VarProcessor varProcessor;
+    vector<vector<int>> groupedVar = varProcessor.groupVarByClass(*var, *classVar);
     double entropy = calcEntropy(var);
-    double conditionalEntropy = calcConditionalEntropy(groupedVar);
+    double conditionalEntropy = calcConditionalEntropy(&groupedVar);
     return entropy-conditionalEntropy;
 }

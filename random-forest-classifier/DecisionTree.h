@@ -7,8 +7,8 @@ using namespace std;
 class DecisionTree {
     public:
         double calcEntropy(vector<int>* var);
-        double calcConditionalEntropy(vector<vector<int>*>* groupedVar);
-        double calcInformationGain(vector<int>* var, vector<vector<int>*>* groupedVar);
+        double calcConditionalEntropy(vector<vector<int>>* groupedVar);
+        double calcInformationGain(vector<int>* var, vector<int>* classVar);
 };
 
 # endif

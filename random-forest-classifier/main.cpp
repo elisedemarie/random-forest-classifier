@@ -4,13 +4,10 @@
 
 using namespace std;
 int main() {
-    vector<int>* v1 = new vector<int>({1, 2, 3});
-    vector<int>* v2 = new vector<int>({1, 2, 3, 3});
-    vector<int>* vC = new vector<int>({1, 2, 3, 1, 2, 3, 3});
-
-    vector<vector<int>*>* v3 = new vector<vector<int>*>({v1, v2});
+    vector<int> targetVar = {1, 1, 0, 0, 0};
+    vector<int> var = {2, 3, 0, 2, 0};
     DecisionTree* dt = new DecisionTree();
-    double entropy = dt->calcInformationGain(vC, v3);
+    double entropy = dt->calcInformationGain(&targetVar, &var);
     cout << entropy << endl;
     return 0;
 }
